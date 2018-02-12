@@ -18,6 +18,8 @@ var bulletTime = 0;
 
 function create() {
 
+	//game.world.setBounds(-1000, -1000, 2000, 2000);
+
 	game.renderer.clearBeforeRender = false;
     game.renderer.roundPixels = true;
 
@@ -40,11 +42,13 @@ function create() {
 
     game.physics.enable([sprite, marky], Phaser.Physics.ARCADE);
 
+    //marky.body.immovable = true;
+
     sprite.body.drag.set(100);
     sprite.body.maxVelocity.set(200);
-    console.log(sprite);
-    console.log(sprite.texture.crop.width);
-    console.log(sprite.texture.crop.height);
+    // console.log(sprite);
+    // console.log(sprite.texture.crop.width);
+    // console.log(sprite.texture.crop.height);
 
     marky.body.velocity.setTo(2, 60);
 
@@ -60,6 +64,10 @@ function update() {
     screenWrap(marky);
 
     bullets.forEachExists(screenWrap, this);
+
+    // console.log(marky.y);
+    // console.log(game.height);
+    // console.log(marky.height);
 }
 
 function fireBullet () {
@@ -89,8 +97,8 @@ function screenWrap (sprite) {
     if (sprite.y < 0) {
         sprite.y = game.height - sprite.texture.crop.height;
     } else if (sprite.y > game.height) {
-        sprite.y = 0 ;//sprite.texture.crop.height;
-        console.log(sprite.texture.crop.height);
+        sprite.y = 0;
+        console.log(sprite.y);
         //console.log(sprite.y = 0 - sprite.texture.crop.height);
     }
 
