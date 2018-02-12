@@ -98,7 +98,7 @@ function screenWrap (sprite) {
         sprite.y = game.height - sprite.texture.crop.height;
     } else if (sprite.y > game.height) {
         sprite.y = 0;
-        console.log(sprite.y);
+        //console.log(sprite.y);
         //console.log(sprite.y = 0 - sprite.texture.crop.height);
     }
 
