@@ -41,6 +41,7 @@ function create() {
     marky = game.add.sprite(0, 0, 'marky');
 
     game.physics.enable([sprite, marky], Phaser.Physics.ARCADE);
+    game.physics.enable([marky,bullets], Phaser.Physics.ARCADE);
 
     //marky.body.immovable = true;
 
@@ -64,6 +65,8 @@ function update() {
     screenWrap(marky);
 
     bullets.forEachExists(screenWrap, this);
+
+    game.physics.arcade.collide(sprite, bullets);
 
     // console.log(marky.y);
     // console.log(game.height);
