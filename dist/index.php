@@ -1,6 +1,6 @@
 <?php 
 
-echo('fart');
+echo('dist/fart');
 
 include_once("dist/pad.html"); 
 
