@@ -1,1 +1,1 @@
-<?php include_once("app/pad.html"); ?>
+<?php include_once("dist/pad.html"); ?>
