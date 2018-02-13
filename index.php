@@ -2,6 +2,6 @@
 
 echo('fart');
 
-include_once("dist/pad.html"); 
+include_once("/dist/pad.html"); 
 
 ?>
