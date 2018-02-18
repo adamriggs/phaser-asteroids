@@ -3,11 +3,10 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create
 
 function preload() {
 	game.load.image('ship', 'images/assets/ship.png');
-	game.load.image('marky', 'images/assets/marky.png');
-    game.load.image('donny', 'images/assets/donny.png');
-    game.load.image('pauly', 'images/assets/pauly.png');
 	game.load.image('bullet', 'images/assets/bullets.png');
 	game.load.image('space', 'images/assets/space.jpg');
+
+    Asteroids.preload();
 }
 
 var ship;
@@ -63,16 +62,18 @@ function create() {
     ship.body.maxVelocity.set(200);
 
     marky.body.velocity.setTo(Math.random() * 2, (Math.random() * 10) + 60);
-    // donny.body.velocity.setTo(Math.random() * 2, (Math.random() * 10) + 60);
-    // pauly.body.velocity.setTo(Math.random() * 2, (Math.random() * 10) + 60);
+    donny.body.velocity.setTo(Math.random() * 2, (Math.random() * 10) + 60);
+    pauly.body.velocity.setTo(Math.random() * 2, (Math.random() * 10) + 60);
 
     cursors = game.input.keyboard.createCursorKeys();
     game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
+
+    Asteroids.create();
 }
 
 function update() {
 
-	Controls();
+	Controls.update();
 
     screenWrap(ship);
     screenWrap(marky);
@@ -81,6 +82,8 @@ function update() {
     bullets.forEachExists(screenWrap, this);
 
     game.physics.arcade.overlap([marky, donny, pauly], bullets, overlapHandler, processHandler, this);
+
+    Asteroids.update();
 }
 
 function overlapHandler() {
@@ -130,4 +133,6 @@ function render() {
 
 	// game.debug.bodyInfo(ship, 32, 32);
 	// game.debug.body(ship);
+
+    Asteroids.render();
 }
