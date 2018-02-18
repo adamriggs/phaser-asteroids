@@ -56,8 +56,8 @@ function create() {
     // bullets.body.checkCollision.left = true;
     // bullets.body.checkCollision.right = true;
 
-    console.log(game.physics);
-    //game.physics.collide(marky, bullets, shotLanded);
+    // console.log(game.physics);
+    // game.physics.collide(marky, bullets, shotLanded);
 
 
 
@@ -84,11 +84,16 @@ function update() {
 
     bullets.forEachExists(screenWrap, this);
 
-    game.physics.arcade.collide(ship, bullets);
+    game.physics.arcade.overlap(marky, bullets, overlapHandler, processHandler, this);
+}
 
-    // console.log(marky.y);
-    // console.log(game.height);
-    // console.log(marky.height);
+function overlapHandler() {
+    console.log('overlap');
+}
+
+function processHandler() {
+    console.log('process');
+    return false;
 }
 
 function fireBullet () {
