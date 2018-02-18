@@ -29,7 +29,7 @@ function create() {
 
 	bullets = game.add.group();
     bullets.enableBody = true;
-    bullets.physicsBodyType = Phaser.Physics.ARCADE;
+    //bullets.physicsBodyType = Phaser.Physics.ARCADE;
 
     bullets.createMultiple(40, 'bullet');
     bullets.setAll('anchor.x', 0.5);
@@ -37,37 +37,16 @@ function create() {
 
     ship = game.add.sprite(372, 268, 'ship');
     ship.anchor.set(0.5);
+    //ship.physicsBodyType = Phaser.Physics.ARCADE;
 
     marky = game.add.sprite(0, 0, 'marky');
     marky.enableBody = true;
-    //console.log(marky);
 
     game.physics.enable([ship, marky], Phaser.Physics.ARCADE);
     game.physics.enable(bullets, Phaser.Physics.ARCADE);
 
-    // marky.body.checkCollision.up = true;
-    // marky.body.checkCollision.down = true;
-    // marky.body.checkCollision.left = true;
-    // marky.body.checkCollision.right = true;
-
-    // console.log(bullets);
-    // bullets.body.checkCollision.up = true;
-    // bullets.body.checkCollision.down = true;
-    // bullets.body.checkCollision.left = true;
-    // bullets.body.checkCollision.right = true;
-
-    // console.log(game.physics);
-    // game.physics.collide(marky, bullets, shotLanded);
-
-
-
-    //marky.body.immovable = true;
-
     ship.body.drag.set(100);
     ship.body.maxVelocity.set(200);
-    // console.log(ship);
-    // console.log(ship.texture.crop.width);
-    // console.log(ship.texture.crop.height);
 
     marky.body.velocity.setTo(2, 60);
 
@@ -124,14 +103,8 @@ function screenWrap (sprite) {
         sprite.y = game.height - sprite.texture.crop.height;
     } else if (sprite.y > game.height) {
         sprite.y = 0;
-        //console.log(sprite.y);
-        //console.log(sprite.y = 0 - sprite.texture.crop.height);
     }
 
-}
-
-function shotLanded() {
-    console.log('collision');
 }
 
 function render() {
