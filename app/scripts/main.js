@@ -8,7 +8,7 @@ function preload() {
 	game.load.image('space', 'images/assets/space.jpg');
 }
 
-var sprite;
+var ship;
 var marky;
 var cursors;
 
@@ -35,21 +35,39 @@ function create() {
     bullets.setAll('anchor.x', 0.5);
     bullets.setAll('anchor.y', 0.5);
 
-    sprite = game.add.sprite(372, 268, 'ship');
-    sprite.anchor.set(0.5);
+    ship = game.add.sprite(372, 268, 'ship');
+    ship.anchor.set(0.5);
 
     marky = game.add.sprite(0, 0, 'marky');
+    marky.enableBody = true;
+    //console.log(marky);
 
-    game.physics.enable([sprite, marky], Phaser.Physics.ARCADE);
-    game.physics.enable([marky,bullets], Phaser.Physics.ARCADE);
+    game.physics.enable([ship, marky], Phaser.Physics.ARCADE);
+    game.physics.enable(bullets, Phaser.Physics.ARCADE);
+
+    // marky.body.checkCollision.up = true;
+    // marky.body.checkCollision.down = true;
+    // marky.body.checkCollision.left = true;
+    // marky.body.checkCollision.right = true;
+
+    // console.log(bullets);
+    // bullets.body.checkCollision.up = true;
+    // bullets.body.checkCollision.down = true;
+    // bullets.body.checkCollision.left = true;
+    // bullets.body.checkCollision.right = true;
+
+    console.log(game.physics);
+    //game.physics.collide(marky, bullets, shotLanded);
+
+
 
     //marky.body.immovable = true;
 
-    sprite.body.drag.set(100);
-    sprite.body.maxVelocity.set(200);
-    // console.log(sprite);
-    // console.log(sprite.texture.crop.width);
-    // console.log(sprite.texture.crop.height);
+    ship.body.drag.set(100);
+    ship.body.maxVelocity.set(200);
+    // console.log(ship);
+    // console.log(ship.texture.crop.width);
+    // console.log(ship.texture.crop.height);
 
     marky.body.velocity.setTo(2, 60);
 
@@ -61,12 +79,12 @@ function update() {
 
 	updateControls();
 
-    screenWrap(sprite);
+    screenWrap(ship);
     screenWrap(marky);
 
     bullets.forEachExists(screenWrap, this);
 
-    game.physics.arcade.collide(sprite, bullets);
+    game.physics.arcade.collide(ship, bullets);
 
     // console.log(marky.y);
     // console.log(game.height);
@@ -79,10 +97,10 @@ function fireBullet () {
         bullet = bullets.getFirstExists(false);
 
         if (bullet) {
-            bullet.reset(sprite.body.x + 28, sprite.body.y + 32);
+            bullet.reset(ship.body.x + 28, ship.body.y + 32);
             bullet.lifespan = 2000;
-            bullet.rotation = sprite.rotation;
-            game.physics.arcade.velocityFromRotation(sprite.rotation, 400, bullet.body.velocity);
+            bullet.rotation = ship.rotation;
+            game.physics.arcade.velocityFromRotation(ship.rotation, 400, bullet.body.velocity);
             bulletTime = game.time.now + 50;
         }
     }
@@ -107,9 +125,13 @@ function screenWrap (sprite) {
 
 }
 
+function shotLanded() {
+    console.log('collision');
+}
+
 function render() {
 	//game.debug.cameraInfo(game.camera, 32, 32);
 
-	// game.debug.bodyInfo(sprite, 32, 32);
-	// game.debug.body(sprite);
+	// game.debug.bodyInfo(ship, 32, 32);
+	// game.debug.body(ship);
 }
