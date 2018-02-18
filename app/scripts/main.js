@@ -63,8 +63,8 @@ function create() {
     ship.body.maxVelocity.set(200);
 
     marky.body.velocity.setTo(Math.random() * 2, (Math.random() * 10) + 60);
-    donny.body.velocity.setTo(Math.random() * 2, (Math.random() * 10) + 60);
-    pauly.body.velocity.setTo(Math.random() * 2, (Math.random() * 10) + 60);
+    // donny.body.velocity.setTo(Math.random() * 2, (Math.random() * 10) + 60);
+    // pauly.body.velocity.setTo(Math.random() * 2, (Math.random() * 10) + 60);
 
     cursors = game.input.keyboard.createCursorKeys();
     game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
@@ -72,7 +72,7 @@ function create() {
 
 function update() {
 
-	updateControls();
+	Controls();
 
     screenWrap(ship);
     screenWrap(marky);
